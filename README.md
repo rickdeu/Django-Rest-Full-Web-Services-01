@@ -1,1 +1,1 @@
-# Django-Rest-Full-Web-Services-01
+# Django Rest Full Web Services 01
