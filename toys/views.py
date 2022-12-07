@@ -45,7 +45,7 @@ def toy_detail(request, pk):
         return JSONResponse(toy_serializer.data)
     
     elif request.method == 'PUT':
-        toy_data = JSONParser().parses(request)
+        toy_data = JSONParser().parse(request)
         toy_serializer = ToySerializer(toy, data=toy_data)
         if toy_serializer.is_valid():
             toy_serializer.save()
@@ -54,3 +54,4 @@ def toy_detail(request, pk):
     elif request.method == 'DELETE':
         toy.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+
