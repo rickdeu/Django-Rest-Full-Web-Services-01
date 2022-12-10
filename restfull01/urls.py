@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from toys import urls as toy_url
+from drones import urls as drone_url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(toy_url)),
+    path('toys/', include(toy_url)),
+    path('', include(drone_url)),
+
 
 ]
