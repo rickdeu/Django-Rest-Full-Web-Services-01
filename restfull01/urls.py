@@ -4,17 +4,15 @@ from toys import urls as toy_url
 from drones import urls as drone_url
 from rest_framework.documentation import include_docs_urls #api documentation
 
-API_TITLE = 'Drones API' # new
-API_DESCRIPTION = 'A Web API for Drones.'
+API_TITLE = 'DRONES API' # new
+API_DESCRIPTION = 'A WEB API FOR DRONES.'
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('toys/', include(toy_url)),
-    path('drones/', include(drone_url)),
-    path('', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
-
-
-
+    path('toys/', include(toy_url)),
+    #path('drones/', include(drone_url)),
+    path('', include(drone_url)),
+    path('docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
 ]
