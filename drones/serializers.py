@@ -17,7 +17,6 @@ class DroneCategorySerializer(serializers.HyperlinkedModelSerializer):
             'drones',
         )
 class DroneSerializer(serializers.HyperlinkedModelSerializer):
-
     # Display the category name
     drone_category = serializers.SlugRelatedField(
         queryset=DroneCategory.objects.all(),
