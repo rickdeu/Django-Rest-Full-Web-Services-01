@@ -11,7 +11,7 @@ API_DESCRIPTION = 'A WEB API FOR DRONES.'
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('toys/', include(toy_url)),
+    #path('toys/', include(toy_url)),
     #path('drones/', include(drone_url)),
     path('api/', include(drone_url)),
     path('', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
