@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&7zvyv6fgwkys9e9&dyp*diijkk_y9k-9hy64frcqjl^9vuu)h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dronesapi.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
