@@ -6,7 +6,10 @@ from drones.models import *
 from drones.serializers import *
 from rest_framework import filters
 from django_filters import AllValuesFilter, DateTimeFilter, NumberFilter
-
+from rest_framework import permissions
+from drones import custompermission
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 class DroneCategoryList(generics.ListCreateAPIView):
     queryset = DroneCategory.objects.all()
@@ -47,15 +50,23 @@ class DroneList(generics.ListCreateAPIView):
     ordering_fields = (
         'name',
         'manufacturing_date',
-
     )
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        custompermission.IsCurrentUserOwnerReadOnly,
+    )
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class DroneDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Drone.objects.all()
     serializer_class = DroneSerializer
     name = 'drone-detail'
-
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        custompermission.IsCurrentUserOwnerReadOnly,
+    )
 
 class PilotList(generics.ListCreateAPIView):
     queryset = Pilot.objects.all()
@@ -73,12 +84,24 @@ class PilotList(generics.ListCreateAPIView):
         'name',
         'races_count'
     )
+    authentication_classes = (
+        TokenAuthentication,
+    )
+    permission_classes = (
+        IsAuthenticated,
+    )
 
 
 class PilotDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Pilot.objects.all()
     serializer_class = PilotSerializer
     name = 'pilot-detail'
+    authentication_classes =(
+        TokenAuthentication,
+    )
+    permission_classes = (
+        IsAuthenticated,
+    )
 
 
 class CompetitionFilter(filters.BaseFilterBackend):

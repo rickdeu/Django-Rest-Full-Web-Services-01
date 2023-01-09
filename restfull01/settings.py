@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'toys',
     # Drones application
     'drones',
+    # Token authentication
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -146,6 +148,12 @@ REST_FRAMEWORK = {
         'rest_framework.filters.OrderingFilter',
         'rest_framework.filters.SearchFilter',
     ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Token -> 82f6384bd11e07e24bf3be4b56b4877398a69bfa
