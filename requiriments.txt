@@ -7,3 +7,5 @@ coreapi==2.3.3
 coreschema==0.0.4
 django-cors-headers==3.13.0
 django-filter
+pytest
+pytest-django
