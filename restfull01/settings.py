@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'toys',
     # Drones application
     'drones',
+    # Token authentication
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -139,13 +141,34 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    # defautl paginator
     'DEFAULT_PAGINATION_CLASS': 'drones.custompagination.LimitOffsetPaginationWithUpperBound',
     'PAGE_SIZE': 4,
+    # filter, search and ordering
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.OrderingFilter',
         'rest_framework.filters.SearchFilter',
     ),
+    # custon permissions
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    # limite for the request
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '300/hour',
+        'user': '100/hour',
+        'drones': '200/hour',
+        'pilots': '150/hour',
+    },
+    'DEFAULT_VERSIONING_CLASSE': 'rest_framework.versioning.NamespaceVersioning',
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Token -> 82f6384bd11e07e24bf3be4b56b4877398a69bfa
